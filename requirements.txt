@@ -1,3 +1,7 @@
 fastapi
 uvicorn
 asyncpg
+flake8
+black
+python-jose[cryptography]
+python-multipart
