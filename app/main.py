@@ -14,27 +14,6 @@ middleware = [
 app = FastAPI(middleware=middleware)
 
 
-# async def auth_token(request: Request):
-#     print(request.headers)
-#     if token != xtoken:
-#         raise HTTPException(status_code=400, detail="X-Token header invalid")
-
-# @app.middleware("http")
-# async def auth(request: Request, call_next):
-#     pass
-# if token in request.headers:
-#     print(request.headers['Authorization'])
-#     response = await call_next(request)
-#     return response
-# else:
-#     response = await call_next(request)
-#     response.status_code = status.HTTP_401_UNAUTHORIZED
-#     response.content = "None"
-#     response.body = "None"
-#     return response
-# @requires(["authenticated"], status_code=404)
-
-
 @app.on_event("startup")
 async def create_pool():
     pass
@@ -53,6 +32,5 @@ app.include_router(
     players.router,
     prefix="/players",
     tags=["players"],
-    # dependencies=[Depends(auth_token)],
     responses={404: {"description": "Endpoint not found"}},
 )
