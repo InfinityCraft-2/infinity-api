@@ -2,7 +2,7 @@ from starlette.authentication import (
     AuthenticationBackend,
     AuthenticationError,
     AuthCredentials,
-    SimpleUser
+    SimpleUser,
 )
 import base64
 import binascii
@@ -37,6 +37,7 @@ class KeyAuth(AuthenticationBackend):
             return True
         else:
             return False
+
 
 # @TODO When a user is denied, return a message stating so vs raising an
 # exception
