@@ -1,6 +1,5 @@
-fastapi
-uvicorn
-asyncpg
-flake8
-black
-python-multipart
+fastapi==0.61.2
+uvicorn==0.12.2
+asyncpg==0.21.0
+flake8==3.8.4
+black==20.8b1
