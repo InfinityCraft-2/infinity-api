@@ -6,16 +6,13 @@ from starlette.middleware import Middleware
 from starlette.middleware.authentication import AuthenticationMiddleware
 
 from routers import players
-from utils import auth
+from utils import auth, secret
+from db import db
 
+DB_POOL = db.Pool(secret.Secret.db_conn)
 middleware = [Middleware(AuthenticationMiddleware, backend=auth.KeyAuth())]
 
 app = FastAPI(middleware=middleware)
-
-
-@app.on_event("startup")
-async def create_pool():
-    pass
 
 
 @app.get("/")
