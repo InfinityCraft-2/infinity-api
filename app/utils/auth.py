@@ -9,7 +9,7 @@ import binascii
 
 from fastapi import HTTPException
 
-from utils.secret import Secret
+from .secret import Secret
 
 
 class KeyAuth(AuthenticationBackend):
