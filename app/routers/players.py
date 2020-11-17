@@ -1,25 +1,29 @@
 from fastapi import APIRouter
+
 from typing import Optional
 
+import main as DB_POOL
+from ..db import db
+from ..validation.models import PlayerModel
 
 router = APIRouter()
 
 
-@router.post("/test")
-async def test_player():
-    """Create a new player"""
-    return {"player": "test player"}
+@router.get("/all")
+async def get_players():
+    """Get all Players"""
+    players = db.PlayerDb(DB_POOL)
+    return await players.all()
 
 
 @router.post("/new")
-async def new_player():
+async def new_player(player: PlayerModel):
     """Create a new player"""
     pass
 
 
 @router.get("/search")
 async def player_search(
-    # token: str = Depends(oauth2_scheme),
     uuid: Optional[str] = None,
     username: Optional[str] = None,
     id: Optional[int] = None,
