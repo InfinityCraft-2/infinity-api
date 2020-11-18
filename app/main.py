@@ -5,11 +5,10 @@ from fastapi.openapi.utils import get_openapi
 from starlette.middleware import Middleware
 from starlette.middleware.authentication import AuthenticationMiddleware
 
-from routers import players
-from utils import auth, secret
-from db import db
+from app.routers import players
+from app.utils import auth, secret
+from app.event import reg_pool
 
-DB_POOL = db.Pool(secret.Secret.db_conn)
 middleware = [Middleware(AuthenticationMiddleware, backend=auth.KeyAuth())]
 
 app = FastAPI(middleware=middleware)
@@ -38,10 +37,11 @@ def custom_openapi():
 
 app.include_router(
     players.router,
-    prefix="/players",
+    prefix="/player",
     tags=["players"],
     responses={404: {"description": "Endpoint not found"}},
 )
 
 
 app.openapi = custom_openapi
+reg_pool(app, secret.Secret.db_conn)
