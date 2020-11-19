@@ -33,7 +33,7 @@ class KeyAuth(AuthenticationBackend):
             raise HTTPException(status_code=401, detail="Unauthorized")
 
     async def _check_token(self, token: str):
-        if token == Secret.api_key:
+        if token in Secret.api_key:
             return True
         else:
             return False
